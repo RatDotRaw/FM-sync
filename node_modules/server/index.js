@@ -1,8 +1,26 @@
-import * as readline from 'node:readline/promises';
-import{stdin as input, stdout as output} from 'node:process';
-const userInput = readline.createInterface({input, output});
+const express = require("express");
+const path = require("path");
 
-let jeNaam = await userInput.question('Wat is je naam? ');
-console.log(jeNaam);
+const app = express();
+const port = 3000;
 
-process.exit();
+app.use(express.static(path.join(__dirname, "../client/src")));
+
+app.get("/", (req, res) => {
+    // res.send('Hello World! and leo')
+    res.sendFile(path.join(__dirname, "../client/publick/index.html"));
+});
+
+// for backend post req
+app.post("/music", (req, res) => {
+    
+    let response = {
+        link: "this is a test"
+    }
+
+    res.send(response);
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
