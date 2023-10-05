@@ -4,16 +4,16 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style/main.css" />
-        <script src="pages/index.js"></script>
+        <script src="pages/index.js" defer></script>
         <title>Document</title>
     </head>
     <body>
-        <audio controls autoplay name="media">
-            <source id="music"
-                src="http://localhost:3000/music/The%20Black%20Keys%20-%20Lonely%20Boy.mp3"
-                type="audio/mpeg"
-            />
-        </audio>
-        <a href="https://www.youtube.com/watch?v=Jrg9KxGNeJY">wikipedia</a>
+        <button id="play">play</button>
+        <button id="pause">pause</button>
+        <input id="volume" type="range" min="0" max="100">
+        <progress id="file" value="32" max="100"></progress>
+        <div id="timestamp"></div>
+        
+        <!-- <a href="https://www.youtube.com/watch?v=Jrg9KxGNeJY">wikipedia</a> -->
     </body>
 </html>

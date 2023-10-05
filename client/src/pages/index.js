@@ -1,11 +1,35 @@
 console.log("javscript loaded!");
 
-window.onload = function() {
-    let audiosource = document.getElementById("music");
-    console.log(audiosource);
-    audiosource.play();
-};
-  
+let audio
+window.addEventListener("load", () => {
+    console.log('loaded audio')
+    audio = document.createElement("audio");
+    audio.setAttribute("src", "http://localhost:3000/music/The%20Black%20Keys%20-%20Lonely%20Boy.mp3");
+    document.body.appendChild(audio);
+    // audio.play() // does not work most of the time
+});
+
+let playEl = document.getElementById("play")
+let pauseEl = document.getElementById("pause")
+let volumeEl = document.getElementById("volume")
+
+let timestampEl = document.getElementById("timestamp")
+
+playEl.addEventListener("click", () => {
+    console.log("play pressed")
+    audio.play()
+    console.log(audio.duration)
+    timestampEl.innerHTML = "lengt "+ audio.duration
+})
+pauseEl.addEventListener("click", () => {
+    console.log("pause pressed")
+    audio.pause()
+})
+volumeEl.addEventListener("change", () => {
+    console.log("volume changed:", volumeEl.value)
+    audio.volume = (volumeEl.value / 100)
+})
+
 
 async function syncMusic() {
     console.log("fechting music");
