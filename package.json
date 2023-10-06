@@ -13,6 +13,7 @@
     "client"
   ],
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "get-audio-duration": "^4.0.1"
   }
 }

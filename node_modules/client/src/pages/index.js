@@ -1,31 +1,44 @@
 console.log("javscript loaded!");
 
 let audio
+let currentSong
+
+let playEl = document.getElementById("play")
+let pauseEl = document.getElementById("pause")
+let volumeEl = document.getElementById("volume")
+
+let progressBar = document.getElementById("progress")
+let timestampEl = document.getElementById("timestamp")
+
 window.addEventListener("load", () => {
     console.log('loaded audio')
     audio = document.createElement("audio");
     audio.setAttribute("src", "http://localhost:3000/music/The%20Black%20Keys%20-%20Lonely%20Boy.mp3");
     document.body.appendChild(audio);
     // audio.play() // does not work most of the time
+    
+    // update the progress bar
+    audio.addEventListener("timeupdate", () => {
+        let currentTime = audio.currentTime;
+        let duration = audio.duration;
+        // console.log("time%:", (currentTime / duration)*100)
+        progressBar.value = ((currentTime/ duration) *100)
+    })
 });
 
-let playEl = document.getElementById("play")
-let pauseEl = document.getElementById("pause")
-let volumeEl = document.getElementById("volume")
 
-let timestampEl = document.getElementById("timestamp")
-
-playEl.addEventListener("click", () => {
+playEl.addEventListener("click", () => { // play button pressed
     console.log("play pressed")
+    audio.currentTime = 60
     audio.play()
     console.log(audio.duration)
     timestampEl.innerHTML = "lengt "+ audio.duration
 })
-pauseEl.addEventListener("click", () => {
+pauseEl.addEventListener("click", () => { // pause button pressed
     console.log("pause pressed")
     audio.pause()
 })
-volumeEl.addEventListener("change", () => {
+volumeEl.addEventListener("change", () => { // volume slider changed
     console.log("volume changed:", volumeEl.value)
     audio.volume = (volumeEl.value / 100)
 })
@@ -54,7 +67,7 @@ async function syncMusic() {
 
     const content = await rawResponse.json();
 
-    // console.log(content);
+    console.log(content);
     return content;
 }
 
